@@ -8,6 +8,8 @@ export default function Search() {
     const [dataApi, setDataApi] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [searchText, setSearchText] = useState();
+    const [pages, setPages] = useState(0);
+    const [totalPages, setTotalPages] = useState(0);
 
     
     var loadFilms = () => {
@@ -15,14 +17,16 @@ export default function Search() {
     setIsLoading(true);
 
         if (searchText.length > 0) {
-            getFilmsFromApiWithSearchedText(searchText).then(data => {
-                setDataApi(data.results);
+            getFilmsFromApiWithSearchedText(searchText, pages+1).then(data => {
+                setPages(data.page);
+                setTotalPages(data.total_pages);
+                setDataApi([...dataApi,...data.results]);
                 setIsLoading(false);
             });
         }       
     }
 
-    console.log(isLoading);
+    // console.log(isLoading);
 
     var displayLoading = () => {
         if(isLoading) {
@@ -47,6 +51,12 @@ export default function Search() {
                 data={dataApi}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({item}) => <FilmItem filmProp={item}/>}
+                onEndReachedThreshold={0.5}
+                onEndReached={() => {
+                    if (pages < totalPages) {
+                        loadFilms()
+                    }
+                }}
                 />
             {displayLoading()}
             </View>

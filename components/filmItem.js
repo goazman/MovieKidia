@@ -38,11 +38,12 @@ const styles = StyleSheet.create({
     width: 120,
     height: 180,
     margin: 5,
-    backgroundColor: 'gray'
+    backgroundColor: 'gray',
+    borderRadius: 9
   },
   content_container: {
     flex: 1,
-    margin: 5
+    margin: 9
   },
   header_container: {
     flex: 3,

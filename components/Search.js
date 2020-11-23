@@ -62,6 +62,7 @@ export default function Search() {
                 placeholder="Titre du film"
                 onChangeText={(text) => searchTextInput(text)}
                 onSubmitEditing={() => loadFilms(true)} 
+                clearButtonMode="always"
                 />
             <Button style={{ height: 50}} title="Rechercher" 
             onPress={() => loadFilms(true)}/>

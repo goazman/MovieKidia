@@ -64,8 +64,7 @@ export default function Search() {
                 onSubmitEditing={() => loadFilms(true)} 
                 clearButtonMode="always"
                 />
-            <Button style={{ height: 50}} title="Rechercher" 
-            onPress={() => loadFilms(true)}/>
+            <Button color="#3c40c6" title="Rechercher" onPress={() => loadFilms(true)}/>
             <FlatList
             data={dataApi}
             keyExtractor={(item) => item.id.toString()}
@@ -91,11 +90,13 @@ const styles = StyleSheet.create({
         marginTop: 40
     },
     textinput: {
-        marginLeft: 5,
-        marginRight: 5,
+        marginLeft: 10,
+        marginRight: 10,
         height: 50,
-        borderColor: "#000000",
-        borderWidth: 1,
+        borderColor: "#0fbcf9",
+        color: "#3c40c6",
+        borderWidth: 2,
+        borderRadius: 9,
         paddingLeft: 5
     },
     loading_container: {
@@ -106,6 +107,6 @@ const styles = StyleSheet.create({
       bottom: 0,
       alignItems: 'center',
       justifyContent: 'center'
-    }   
+    },
 })
 

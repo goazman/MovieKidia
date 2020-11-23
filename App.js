@@ -9,8 +9,15 @@ const Stack  = createStackNavigator();
 
 function NavStack() {
   return(
-    <Stack.Navigator headerMode= "screen" initialRouteName='Search'>
-      <Stack.Screen name="Search" component={Search} options={{ title: "Rechercher des films"}}/>
+    <Stack.Navigator 
+    headerMode="screen" 
+    initialRouteName="Search"
+    screenOptions={{
+      headerTintColor: '#3c40c6',
+      headerStyle: { backgroundColor: '#0fbcf9'},
+    }}
+    >
+      <Stack.Screen name="Search" component={Search} options={{title: "Rechercher des films"}}/>
     </Stack.Navigator>
   );
 }

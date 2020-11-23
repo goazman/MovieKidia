@@ -11,15 +11,15 @@ const Stack  = createStackNavigator();
 function NavStack() {
   return(
     <Stack.Navigator 
-    headerMode="screen" 
+    headerMode="float"
     initialRouteName="HomePage"
     screenOptions={{
       headerTintColor: '#3c40c6',
       headerStyle: { backgroundColor: '#0fbcf9'},
     }}
     >
+      <Stack.Screen name="HomePage" component={HomePage} options={{title: "Accueil"}} />
       <Stack.Screen name="Search" component={Search} options={{title: "Rechercher des films"}}/>
-      <Stack.Screen name="HomePage" component={HomePage} options={{title: "Accueil"}}/>
     </Stack.Navigator>
   );
 }

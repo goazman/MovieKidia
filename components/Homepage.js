@@ -7,7 +7,7 @@ export default function HomePage({navigation}) {
         <View style={styles.main_container}>
             <TouchableOpacity onPress={() => navigation.navigate("Search")}>
                 <View style={styles.HomeTitle}>
-                    <Text h1 h1Style={{ color:"#3c40c6",fontWeight:"bold"}}>Entrer</Text>
+                    <Text h1 h1Style={{color:"#3c40c6",fontWeight:"bold"}}>Entrer</Text>
                 </View>
             </TouchableOpacity>
         </View>
@@ -26,6 +26,5 @@ const styles = StyleSheet.create({
         backgroundColor:"#0fbcf9",
         borderRadius: 9,
         width: 150
-
     }
   })

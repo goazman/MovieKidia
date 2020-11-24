@@ -1,6 +1,7 @@
 import React from 'react';
 import Search from "./components/Search";
 import HomePage from "./components/Homepage";
+import FilmDetails from "./components/filmDetails";
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -20,6 +21,7 @@ function NavStack() {
     >
       <Stack.Screen name="HomePage" component={HomePage} options={{title: "Accueil"}} />
       <Stack.Screen name="Search" component={Search} options={{title: "Rechercher des films"}}/>
+      <Stack.Screen name="FilmDetails" component={FilmDetails} options={{title: "Fiche technique"}}/>
     </Stack.Navigator>
   );
 }

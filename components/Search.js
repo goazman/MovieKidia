@@ -2,8 +2,9 @@ import React, {useState} from 'react';
 import { StyleSheet, View, FlatList,  Button, TextInput, ActivityIndicator } from "react-native";
 import FilmItem from "../components/filmItem";
 import { getFilmsFromApiWithSearchedText } from '../API/TMDBApi';
+import { NavigationContainer } from '@react-navigation/native';
 
-export default function Search() {
+export default function Search({navigation}) {
 
     const [searchText, setSearchText] = useState("");
     const [pages, setPages] = useState(0);
@@ -53,6 +54,11 @@ export default function Search() {
         }
     }
 
+    var displayDetailForFilm = (idFilm) => {
+        console.log("je chope bien l'id du film : " + idFilm)
+        navigation.navigate("FilmDetails",{idFilm: idFilm});
+    }
+
 
 
     return(
@@ -68,7 +74,7 @@ export default function Search() {
             <FlatList
             data={dataApi}
             keyExtractor={(item) => item.id.toString()}
-            renderItem={({item}) => <FilmItem filmProp={item}/>}
+            renderItem={({item}) => <FilmItem filmProp={item} displayDetailForFilm={displayDetailForFilm}/>}
             onEndReachedThreshold={0.5}
             onEndReached={() => {
                 if (pages < totalPages) {

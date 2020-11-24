@@ -21,7 +21,7 @@ function NavStack() {
     >
       <Stack.Screen name="HomePage" component={HomePage} options={{title: "Accueil"}} />
       <Stack.Screen name="Search" component={Search} options={{title: "Rechercher des films"}}/>
-      <Stack.Screen name="FilmDetails" component={FilmDetails} options={{title: "Fiche technique"}}/>
+      <Stack.Screen name="FilmDetails" component={FilmDetails} options={{title: "Détail du film"}}/>
     </Stack.Navigator>
   );
 }

@@ -1,9 +1,11 @@
 import React from 'react'
-import { StyleSheet, View, Text, Image } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 
-export default function filmDetails() {
+export default function filmDetails(props) {
+    console.log(props.navigation);
+
     return(
-        <View>
+        <View style={styles.main_container}>
             <Text>Détails du film</Text>
         </View>
     )

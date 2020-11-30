@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Search from "./components/Search";
 import HomePage from "./components/Homepage";
 import FilmDetails from "./components/filmDetails";

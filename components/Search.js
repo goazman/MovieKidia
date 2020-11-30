@@ -48,14 +48,14 @@ export default function Search({navigation}) {
         if(isLoading) {
             return (
                 <View style={styles.loading_container}>
-                    <ActivityIndicator size="large" color="#00ff00" />
+                    <ActivityIndicator size="large" color="#3c40c6" />
                 </View>
             )
         }
     }
 
     var displayDetailForFilm = (idFilm) => {
-        console.log("je chope bien l'id du film : " + idFilm)
+        // console.log("Id du film : " + idFilm)
         navigation.navigate("FilmDetails",{idFilm: idFilm});
     }
 

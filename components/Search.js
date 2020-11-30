@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { StyleSheet, View, FlatList,  Button, TextInput, ActivityIndicator } from "react-native";
 import FilmItem from "../components/filmItem";
 import { getFilmsFromApiWithSearchedText } from '../API/TMDBApi';
-import { NavigationContainer } from '@react-navigation/native';
+
 
 export default function Search({navigation}) {
 
@@ -39,7 +39,6 @@ export default function Search({navigation}) {
     
 
     var searchTextInput = (text) => {
-        // console.log(text)
         setSearchText(text);
     }
 
@@ -54,8 +53,8 @@ export default function Search({navigation}) {
         }
     }
 
+    // NAVIGATION to filmDetails
     var displayDetailForFilm = (idFilm) => {
-        // console.log("Id du film : " + idFilm)
         navigation.navigate("FilmDetails",{idFilm: idFilm});
     }
 
@@ -113,6 +112,6 @@ const styles = StyleSheet.create({
       bottom: 0,
       alignItems: 'center',
       justifyContent: 'center'
-    },
+    }
 })
 

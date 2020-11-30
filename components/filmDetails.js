@@ -17,7 +17,6 @@ export default function filmDetails({route}) {
     useEffect ( () => {
         async function loadDetails() {
             var result = await getFilmsDetailsFromApi(filmId).then(data =>{
-                // console.log("@@@@@@@@@"+data.genres+"@@@@@@@@@@");
                 setDataDetailsFilm(data);
                 setIsLoading(false);
             });
@@ -37,7 +36,7 @@ export default function filmDetails({route}) {
 
     var displayFilms = () => {
         if(dataDetailsFilm != undefined) {
-            console.log("@@@"+dataDetailsFilm.genres+"@@@");
+            
             return(
                 <ScrollView style={styles.scroll_container}>
                     <Image
@@ -83,6 +82,7 @@ const styles = StyleSheet.create({
     },
     scroll_container: {
         flex: 1,
+        width: "100%"
     },
     title: {
         flex: 1,
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     },
     image: {
         height: 200,
-        margin: 5,
+        margin: 5
       },
       overview: {
           flex: 1,
@@ -112,5 +112,5 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginLeft: 10,
         marginRight: 10
-    },
+    }
   })

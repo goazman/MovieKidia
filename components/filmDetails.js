@@ -1,7 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import { StyleSheet, View, ActivityIndicator, ScrollView, Image, Text } from 'react-native';
+import moment from 'moment';
+import numeral from 'numeral';
 
 import { getFilmsDetailsFromApi, getImageFromApi } from "../API/TMDBApi";
+
 
 export default function filmDetails({route}) {
     
@@ -9,7 +12,7 @@ export default function filmDetails({route}) {
     const filmId = route.params.idFilm;
 
     const [isLoading, setIsLoading] = useState(true);
-    const [dataDetailsFilm, setDataDetailsFilm] = useState([]);
+    const [dataDetailsFilm, setDataDetailsFilm] = useState();
 
     useEffect ( () => {
         async function loadDetails() {
@@ -20,7 +23,7 @@ export default function filmDetails({route}) {
             });
         }
         loadDetails()
-    }, []);
+    },[]);
 
     var displayLoading = () => {
         if(isLoading) {
@@ -34,17 +37,19 @@ export default function filmDetails({route}) {
 
     var displayFilms = () => {
         if(dataDetailsFilm != undefined) {
+            console.log("@@@"+dataDetailsFilm.genres+"@@@");
             return(
                 <ScrollView style={styles.scroll_container}>
                     <Image
                         style={styles.image}
                         source={{uri: getImageFromApi(dataDetailsFilm.backdrop_path)}}
-                        />
+                    />
                     <Text style={styles.title}>{dataDetailsFilm.title}</Text>
                     <Text style={styles.overview}>{dataDetailsFilm.overview}</Text>
-                    <Text style={styles.details}>Sorti le : {dataDetailsFilm.release_date} </Text>
+                    <Text style={styles.details}>Sorti le : {moment(dataDetailsFilm.release_date).format("DD/MM/YYYY")}</Text>
                     <Text style={styles.details}>Note : {dataDetailsFilm.vote_average} /10</Text>
                     <Text style={styles.details}>Nombre de votes : {dataDetailsFilm.vote_count}</Text>
+                    <Text style={styles.details}>Budget : {numeral(dataDetailsFilm.budget).format("0,0[.]00 $")}</Text>
                     <Text style={styles.details}>Genres : {dataDetailsFilm.genres.map(function(genre){return genre.name;}).join(" / ")}</Text>
                     <Text style={styles.details}>Distribution : {dataDetailsFilm.production_companies.map(function(brand){return brand.name;}).join(" / ")}</Text>
                 </ScrollView>

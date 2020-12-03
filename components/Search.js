@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { StyleSheet, View, FlatList,  Button, TextInput, ActivityIndicator } from "react-native";
-import FilmItem from "../components/filmItem";
+import FilmItem from "./FilmItem";
 import { getFilmsFromApiWithSearchedText } from '../API/TMDBApi';
 
 

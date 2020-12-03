@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, View, ActivityIndicator, ScrollView, Image, Text } from 'react-native';
+import { StyleSheet, View, ActivityIndicator, ScrollView, Image, Text, TouchableOpacity } from 'react-native';
 import moment from 'moment';
 import numeral from 'numeral';
+import { FontAwesome } from '@expo/vector-icons';
+
 
 import { getFilmsDetailsFromApi, getImageFromApi } from "../API/TMDBApi";
 
-
-export default function filmDetails({route}) {
+export default function FilmDetails({route}) {
     
     //From Search.js Navigation Route to API call
     const filmId = route.params.idFilm;
@@ -44,6 +45,9 @@ export default function filmDetails({route}) {
                         source={{uri: getImageFromApi(dataDetailsFilm.backdrop_path)}}
                     />
                     <Text style={styles.title}>{dataDetailsFilm.title}</Text>
+                    <TouchableOpacity style={styles.heartIcon} onPress={() => console.log("click ok")}>
+                        <FontAwesome name="heart-o" size={32} color="#0fbcf9"/>
+                    </TouchableOpacity>
                     <Text style={styles.overview}>{dataDetailsFilm.overview}</Text>
                     <Text style={styles.details}>Sorti le : {moment(dataDetailsFilm.release_date).format("DD/MM/YYYY")}</Text>
                     <Text style={styles.details}>Note : {dataDetailsFilm.vote_average} /10</Text>
@@ -69,7 +73,7 @@ export default function filmDetails({route}) {
 
 const styles = StyleSheet.create({
     main_container: {
-      flex: 1,
+        flex: 1,
     },
     loading_container: {
         position: 'absolute',
@@ -96,21 +100,26 @@ const styles = StyleSheet.create({
         height: 200,
         margin: 5
       },
-      overview: {
-          flex: 1,
-          fontSize: 16,
-          textAlign:"justify",
-          lineHeight: 25,
-          marginLeft: 10,
-          marginRight: 10,
-          marginBottom: 20
-      },
-      details: {
+    overview: {
+        flex: 1,
+        fontSize: 16,
+        textAlign:"justify",
+        lineHeight: 25,
+        marginLeft: 10,
+        marginRight: 10,
+        marginBottom: 20
+    },
+    details: {
         flex: 1,
         fontSize: 14,
         fontStyle: "italic",
         marginTop: 10,
         marginLeft: 10,
         marginRight: 10
+    },
+    heartIcon: {
+        flex: 1,
+        alignItems: "center",
+        marginBottom: 5
     }
   })

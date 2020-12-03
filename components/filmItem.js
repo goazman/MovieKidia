@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
 import { getImageFromApi } from "../API/TMDBApi";
 
 export default function FilmItem(props) {
@@ -17,6 +18,7 @@ export default function FilmItem(props) {
           <View style={styles.header_container}>
             <Text style={styles.title_text}>{movie.title}</Text>
             <Text style={styles.vote_text}>{movie.vote_average}</Text>
+          <FontAwesome name="heart-o" size={21} color="#0fbcf9" style={styles.fav_icon}/>
           </View>
           <View style={styles.description_container}>
             <Text style={styles.description_text} numberOfLines={6}>{movie.overview}</Text>
@@ -44,11 +46,15 @@ const styles = StyleSheet.create({
   },
   content_container: {
     flex: 1,
-    margin: 9
+    marginTop: 5,
+    marginRight: 10,
+    marginBottom: 5,
+    marginLeft: 10
   },
   header_container: {
-    flex: 3,
-    flexDirection: 'row'
+    flex: 2,
+    flexDirection: 'row',
+    alignItems: "center",
   },
   title_text: {
     fontWeight: 'bold',
@@ -57,13 +63,16 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     paddingRight: 5
   },
+  fav_icon: {
+    marginLeft: 10,
+  },
   vote_text: {
     fontWeight: 'bold',
-    fontSize: 26,
+    fontSize: 21,
     color: '#666666'
   },
   description_container: {
-    flex: 7
+    flex: 7,
   },
   description_text: {
     fontStyle: 'italic',

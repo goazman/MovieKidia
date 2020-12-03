@@ -8,6 +8,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 
+import { Provider } from 'react-redux'
+const store = createStore(combineReducers({}));
+
+
 const Stack  = createStackNavigator();
 
 function NavStack() {
@@ -29,9 +33,11 @@ function NavStack() {
 
 export default function App (){
   return (
-    <NavigationContainer>
-      <NavStack/>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <NavStack/>
+      </NavigationContainer>
+    </Provider>
   );
 }
 

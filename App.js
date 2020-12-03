@@ -2,7 +2,7 @@ import React from 'react';
 
 import Search from "./components/Search";
 import HomePage from "./components/Homepage";
-import FilmDetails from "./components/FilmDetails";
+import FilmDetails from "./components/filmDetails";
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';

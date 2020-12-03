@@ -18,7 +18,7 @@ export default function FilmItem(props) {
           <View style={styles.header_container}>
             <Text style={styles.title_text}>{movie.title}</Text>
             <Text style={styles.vote_text}>{movie.vote_average}</Text>
-          <FontAwesome name="heart-o" size={21} color="#0fbcf9" style={styles.fav_icon}/>
+          <FontAwesome name="heart-o" size={21} color="#0fbcf9" style={styles.fav_icon} onPress={() => console.log("click ok Item")}/>
           </View>
           <View style={styles.description_container}>
             <Text style={styles.description_text} numberOfLines={6}>{movie.overview}</Text>

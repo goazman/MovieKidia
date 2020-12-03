@@ -45,7 +45,7 @@ export default function FilmDetails({route}) {
                         source={{uri: getImageFromApi(dataDetailsFilm.backdrop_path)}}
                     />
                     <Text style={styles.title}>{dataDetailsFilm.title}</Text>
-                    <TouchableOpacity style={styles.heartIcon} onPress={() => console.log("click ok")}>
+                    <TouchableOpacity style={styles.heartIcon} onPress={() => console.log("click ok details")}>
                         <FontAwesome name="heart-o" size={32} color="#0fbcf9"/>
                     </TouchableOpacity>
                     <Text style={styles.overview}>{dataDetailsFilm.overview}</Text>

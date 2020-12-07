@@ -4,10 +4,11 @@ import moment from 'moment';
 import numeral from 'numeral';
 import { FontAwesome } from '@expo/vector-icons';
 
-
 import { getFilmsDetailsFromApi, getImageFromApi } from "../API/TMDBApi";
 
-export default function FilmDetails({route}) {
+import {connect} from 'react-redux';
+
+function FilmDetails({route, toggleFavorite}) {
     
     //From Search.js Navigation Route to API call
     const filmId = route.params.idFilm;
@@ -35,9 +36,10 @@ export default function FilmDetails({route}) {
         }
     }
 
+
+    // UI design view
     var displayFilms = () => {
         if(dataDetailsFilm != undefined) {
-            
             return(
                 <ScrollView style={styles.scroll_container}>
                     <Image
@@ -45,7 +47,7 @@ export default function FilmDetails({route}) {
                         source={{uri: getImageFromApi(dataDetailsFilm.backdrop_path)}}
                     />
                     <Text style={styles.title}>{dataDetailsFilm.title}</Text>
-                    <TouchableOpacity style={styles.heartIcon} onPress={() => console.log("click ok")}>
+                    <TouchableOpacity style={styles.heartIcon} onPress={() => toggleFavorite()}>
                         <FontAwesome name="heart-o" size={32} color="#0fbcf9"/>
                     </TouchableOpacity>
                     <Text style={styles.overview}>{dataDetailsFilm.overview}</Text>
@@ -59,8 +61,8 @@ export default function FilmDetails({route}) {
             )
         }
     }
-
-    //Main view screen
+    
+    //Render view
     return(
         <View style={styles.main_container}>
             {displayLoading()}
@@ -68,7 +70,6 @@ export default function FilmDetails({route}) {
         </View>
     )
 }
-
 
 
 const styles = StyleSheet.create({
@@ -123,3 +124,16 @@ const styles = StyleSheet.create({
         marginBottom: 5
     }
   })
+
+  function mapDispatchToProps(dispatch) {
+    return {
+        toggleFavorite: function() { 
+          dispatch( {type: 'TOGGLE_FAVORITE'} ) 
+      }
+    }
+  }
+
+export default connect(
+    null, 
+    mapDispatchToProps
+)(FilmDetails);

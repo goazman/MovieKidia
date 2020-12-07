@@ -1,18 +1,26 @@
 import React from 'react'
 import { StyleSheet, View, TouchableOpacity, ImageBackground, SafeAreaView } from 'react-native';
 import { Text } from 'react-native-elements';
+import { LinearGradient } from 'expo-linear-gradient';
+
 
 export default function HomePage({navigation}) {
     return (
-        <View style={{flex:1}}>
-            <ImageBackground style={styles.main_container} resizeMode= "stretch" source={require("../assets/homepage.jpg")}>
+        <SafeAreaView style={{flex:1}}>
+            <ImageBackground style={styles.main_container} 
+                resizeMode= "stretch" 
+                source={require("../assets/homepage.jpg")}>
                 <TouchableOpacity onPress={() => navigation.navigate("Search")}>
                     <View style={styles.HomeTitle}>
-                        <Text h1 h1Style={{color:"#3c40c6",fontWeight:"bold"}}>Entrance</Text>
+                        <LinearGradient style={styles.button}
+                            colors={['#057ea8',"#0fbcf9",'#057ea8']}
+                            locations={[0.8, 0.5, 0.8]}>
+                            <Text h1 h1Style={{color:"#fff7d9", textAlign:"center"}}>Entrance</Text>
+                        </LinearGradient>
                     </View>
                 </TouchableOpacity>
             </ImageBackground>
-        </View>
+        </SafeAreaView>
     )
 }
 
@@ -27,8 +35,10 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         marginTop: 200,
-        backgroundColor:"#0fbcf9",
-        borderRadius: 15,
-        width: 220
+    },
+    button: {
+        borderRadius: 6,
+        width: 200,
+        textAlign: "center"
     }
   })

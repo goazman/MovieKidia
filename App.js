@@ -7,8 +7,13 @@ import FilmDetails from "./components/filmDetails";
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
+import toggleFavorite from "./reducers/favoriteReducers";
+import {Provider} from 'react-redux';
+import {createStore, combineReducers} from 'redux';
 
-const Stack  = createStackNavigator();
+const store = createStore(combineReducers({toggleFavorite}));
+
+const Stack = createStackNavigator();
 
 function NavStack() {
   return(
@@ -29,9 +34,11 @@ function NavStack() {
 
 export default function App (){
   return (
-    <NavigationContainer>
-      <NavStack/>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <NavStack/>
+      </NavigationContainer>
+    </Provider>
   );
 }
 

@@ -15,7 +15,7 @@ export default function HomePage({navigation}) {
                         <LinearGradient style={styles.button}
                             colors={['#057ea8',"#0fbcf9",'#057ea8']}
                             locations={[0.8, 0.5, 0.8]}>
-                            <Text h1 h1Style={{color:"#fff7d9", textAlign:"center"}}>Entrance</Text>
+                            <Text h2 h2Style={{color:"#fff7d9", textAlign:"center"}}>Entrance</Text>
                         </LinearGradient>
                     </View>
                 </TouchableOpacity>
@@ -34,11 +34,17 @@ const styles = StyleSheet.create({
     HomeTitle: {
         alignItems: "center",
         justifyContent: "center",
-        marginTop: 200,
+        marginTop: 210,
+        shadowColor: "#3c40c6",
+        shadowOpacity: 0.7,
+        shadowRadius: 12,
+        shadowOffset : { width: 2, height: 6}
     },
     button: {
-        borderRadius: 6,
-        width: 200,
-        textAlign: "center"
+        borderRadius: 15,
+        width: 160,
+        height: 53,
+        textAlign: "center",
+        padding: 3
     }
   })

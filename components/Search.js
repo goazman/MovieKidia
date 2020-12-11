@@ -59,7 +59,6 @@ export default function Search({navigation}) {
     }
 
 
-
     return(
         <View style={styles.main_container}>
             <TextInput 

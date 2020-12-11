@@ -6,9 +6,10 @@ import { FontAwesome } from '@expo/vector-icons';
 
 import { getFilmsDetailsFromApi, getImageFromApi } from "../API/TMDBApi";
 
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
-function FilmDetails({route, toggleFavorite}) {
+
+function FilmDetails({props, route, toggleFavorite, favoritesFilm}) {
     
     //From Search.js Navigation Route to API call
     const filmId = route.params.idFilm;
@@ -36,6 +37,16 @@ function FilmDetails({route, toggleFavorite}) {
         }
     }
 
+    var displayFavoriteIcon = () =>{
+
+        var favIcon = <FontAwesome name="heart-o" size={32} color="#0fbcf9"/>;
+
+        if (favoritesFilm.findIndex(item => item.id === state.film.id)!== -1) {
+            favIcon = <FontAwesome name="heart" size={32} color="#0fbcf9"/>;
+        }
+        
+        return (favIcon)
+    }
 
     // UI design view
     var displayFilms = () => {
@@ -47,12 +58,10 @@ function FilmDetails({route, toggleFavorite}) {
                         source={{uri: getImageFromApi(dataDetailsFilm.backdrop_path)}}
                     />
                     <Text style={styles.title}>{dataDetailsFilm.title}</Text>
-<<<<<<< HEAD
-                    <TouchableOpacity style={styles.heartIcon} onPress={() => console.log("click ok details")}>
-=======
-                    <TouchableOpacity style={styles.heartIcon} onPress={() => toggleFavorite()}>
->>>>>>> reduxStart
-                        <FontAwesome name="heart-o" size={32} color="#0fbcf9"/>
+                    <TouchableOpacity 
+                        style={styles.heartIcon} 
+                        onPress={() => toggleFavorite()}>
+                        {displayFavoriteIcon()}
                     </TouchableOpacity>
                     <Text style={styles.overview}>{dataDetailsFilm.overview}</Text>
                     <Text style={styles.details}>Sorti le : {moment(dataDetailsFilm.release_date).format("DD/MM/YYYY")}</Text>
@@ -78,7 +87,7 @@ function FilmDetails({route, toggleFavorite}) {
 
 const styles = StyleSheet.create({
     main_container: {
-        flex: 1,
+        flex: 1
     },
     loading_container: {
         position: 'absolute',
@@ -129,6 +138,15 @@ const styles = StyleSheet.create({
     }
   })
 
+//   Parametre state = state global donc dans Props de Filmdetails => accès au state de l'application et donc aux films favoris
+  function mapStateToProps(state) {
+      console.log(state);
+      return {
+          favoritesFilm: state.favoritesFilm
+        }
+      
+  }
+
   function mapDispatchToProps(dispatch) {
     return {
         toggleFavorite: function() { 
@@ -138,6 +156,6 @@ const styles = StyleSheet.create({
   }
 
 export default connect(
-    null, 
+    mapStateToProps, 
     mapDispatchToProps
 )(FilmDetails);

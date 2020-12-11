@@ -27,7 +27,10 @@ function FilmDetails({props, route, toggleFavorite, favoritesFilm}) {
         loadDetails()
     },[]);
 
+
+    // Icone d'indication de chargement de la liste
     var displayLoading = () => {
+
         if(isLoading) {
             return (
                 <View style={styles.loading_container}>
@@ -37,14 +40,15 @@ function FilmDetails({props, route, toggleFavorite, favoritesFilm}) {
         }
     }
 
+    // Modification état Icone favoris
     var displayFavoriteIcon = () =>{
 
         var favIcon = <FontAwesome name="heart-o" size={32} color="#0fbcf9"/>;
 
         if (favoritesFilm.findIndex(item => item.id === state.film.id)!== -1) {
+
             favIcon = <FontAwesome name="heart" size={32} color="#0fbcf9"/>;
         }
-        
         return (favIcon)
     }
 

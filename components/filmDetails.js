@@ -50,16 +50,16 @@ function FilmDetails(props) {
     }
 
     // Modification état Icone favoris
-    // var displayFavoriteIcon = () =>{
+    var displayFavoriteIcon = () =>{
 
-    //     var favIcon = <FontAwesome name="heart-o" size={32} color="#0fbcf9"/>;
+        var favIcon = <FontAwesome name="heart-o" size={32} color="#0fbcf9"/>;
 
-    //     if (favoritesFilm.findIndex(item => item.id === state.film.id)!== -1) {
+        if (favoritesFilm.findIndex(item => item.id === state.film.id)!== -1) {
 
-    //         favIcon = <FontAwesome name="heart" size={32} color="#0fbcf9"/>;
-    //     }
-    //     return (favIcon)
-    // }
+            favIcon = <FontAwesome name="heart" size={32} color="#0fbcf9"/>;
+        }
+        return (favIcon)
+    }
 
     // UI design view
     var displayFilms = () => {
@@ -74,8 +74,7 @@ function FilmDetails(props) {
                     <TouchableOpacity 
                         style={styles.heartIcon} 
                         onPress={() => toggleFavorite()}>
-                        {/* {displayFavoriteIcon()} */}
-                        <FontAwesome name="heart-o" size={32} color="#0fbcf9"/>
+                        {displayFavoriteIcon()}
                     </TouchableOpacity>
                     <Text style={styles.overview}>{dataDetailsFilm.overview}</Text>
                     <Text style={styles.details}>Sorti le : {moment(dataDetailsFilm.release_date).format("DD/MM/YYYY")}</Text>

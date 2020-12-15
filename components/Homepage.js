@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     HomeTitle: {
         alignItems: "center",
         justifyContent: "center",
-        marginTop: 210,
+        marginTop: 180,
         shadowColor: "#3c40c6",
         shadowOpacity: 0.7,
         shadowRadius: 12,
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     button: {
         borderRadius: 15,
         width: 160,
-        height: 53,
+        height: 55,
         textAlign: "center",
         padding: 3
     }

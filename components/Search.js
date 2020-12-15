@@ -42,7 +42,7 @@ export default function Search({navigation}) {
         setSearchText(text);
     }
 
-    
+    // Icone d'indication de chargement de la liste
     var displayLoading = () => {
         if(isLoading) {
             return (
@@ -53,11 +53,10 @@ export default function Search({navigation}) {
         }
     }
 
-    // NAVIGATION to filmDetails
+    // NAVIGATION and idFilm (useRoute hook) to filmDetails
     var displayDetailForFilm = (idFilm) => {
         navigation.navigate("FilmDetails",{idFilm: idFilm});
     }
-
 
     return(
         <View style={styles.main_container}>

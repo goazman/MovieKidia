@@ -7,11 +7,13 @@ import { FontAwesome } from '@expo/vector-icons';
 import { getFilmsDetailsFromApi, getImageFromApi } from "../API/TMDBApi";
 
 import { connect } from 'react-redux';
+import { useRoute } from '@react-navigation/native';
 
-
-function FilmDetails({props, route, toggleFavorite, favoritesFilm}) {
+// {props, toggleFavorite, favoritesFilm}
+function FilmDetails(props) {
     
     //From Search.js Navigation Route to API call
+    const route = useRoute();
     const filmId = route.params.idFilm;
 
     const [isLoading, setIsLoading] = useState(true);
@@ -26,11 +28,11 @@ function FilmDetails({props, route, toggleFavorite, favoritesFilm}) {
         }
         loadDetails()
     },[]);
-
+    
+    // console.log(props.favoritesFilm);
 
     // Icone d'indication de chargement de la liste
     var displayLoading = () => {
-
         if(isLoading) {
             return (
                 <View style={styles.loading_container}>
@@ -40,17 +42,24 @@ function FilmDetails({props, route, toggleFavorite, favoritesFilm}) {
         }
     }
 
-    // Modification état Icone favoris
-    var displayFavoriteIcon = () =>{
-
-        var favIcon = <FontAwesome name="heart-o" size={32} color="#0fbcf9"/>;
-
-        if (favoritesFilm.findIndex(item => item.id === state.film.id)!== -1) {
-
-            favIcon = <FontAwesome name="heart" size={32} color="#0fbcf9"/>;
-        }
-        return (favIcon)
+    // Ajout ou suppression des favoris = mapDispatchToProps
+    var toggleFavorite = () => {
+        const action = { type: "TOGGLE_FAVORITE", value: dataDetailsFilm };
+        props.dispatch(action)
+        // console.log(action);
     }
+
+    // Modification état Icone favoris
+    // var displayFavoriteIcon = () =>{
+
+    //     var favIcon = <FontAwesome name="heart-o" size={32} color="#0fbcf9"/>;
+
+    //     if (favoritesFilm.findIndex(item => item.id === state.film.id)!== -1) {
+
+    //         favIcon = <FontAwesome name="heart" size={32} color="#0fbcf9"/>;
+    //     }
+    //     return (favIcon)
+    // }
 
     // UI design view
     var displayFilms = () => {
@@ -65,7 +74,8 @@ function FilmDetails({props, route, toggleFavorite, favoritesFilm}) {
                     <TouchableOpacity 
                         style={styles.heartIcon} 
                         onPress={() => toggleFavorite()}>
-                        {displayFavoriteIcon()}
+                        {/* {displayFavoriteIcon()} */}
+                        <FontAwesome name="heart-o" size={32} color="#0fbcf9"/>
                     </TouchableOpacity>
                     <Text style={styles.overview}>{dataDetailsFilm.overview}</Text>
                     <Text style={styles.details}>Sorti le : {moment(dataDetailsFilm.release_date).format("DD/MM/YYYY")}</Text>
@@ -79,7 +89,8 @@ function FilmDetails({props, route, toggleFavorite, favoritesFilm}) {
         }
     }
     
-    //Render view
+    // Render view
+    // console.log(props);
     return(
         <View style={styles.main_container}>
             {displayLoading()}
@@ -144,22 +155,7 @@ const styles = StyleSheet.create({
 
 //   Parametre state = state global donc dans Props de Filmdetails => accès au state de l'application et donc aux films favoris
   function mapStateToProps(state) {
-      console.log(state);
-      return {
-          favoritesFilm: state.favoritesFilm
-        }
-      
+      return { favoritesFilm: state.favoritesFilm }
   }
 
-  function mapDispatchToProps(dispatch) {
-    return {
-        toggleFavorite: function() { 
-          dispatch( {type: 'TOGGLE_FAVORITE'} ) 
-      }
-    }
-  }
-
-export default connect(
-    mapStateToProps, 
-    mapDispatchToProps
-)(FilmDetails);
+export default connect(mapStateToProps)(FilmDetails);

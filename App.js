@@ -17,11 +17,11 @@ const Stack = createStackNavigator();
 function NavStack() {
   return(
     <Stack.Navigator 
-    headerMode="float"
-    initialRouteName="HomePage"
-    screenOptions={{
-      headerTintColor: '#3c40c6',
-      headerStyle: { backgroundColor: '#0fbcf9'},
+      headerMode="float"
+      initialRouteName="HomePage"
+      screenOptions={{
+        headerTintColor: '#3c40c6',
+        headerStyle: { backgroundColor: '#0fbcf9'},
     }}
     >
       <Stack.Screen name="HomePage" component={HomePage} options={{title: "Accueil"}} />

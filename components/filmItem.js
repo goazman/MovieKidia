@@ -14,7 +14,7 @@ export default function FilmItem(props) {
       if (props.isThereFavoritesFilm) {
         return <FontAwesome name="heart" size={21} color="#0fbcf9" style={styles.fav_icon}/>
       }
-  }
+    }
 
     return (
       <TouchableOpacity style={styles.main_container} onPress={() => displayDetailForFilm(movie.id)}>
@@ -24,7 +24,7 @@ export default function FilmItem(props) {
         />
         <View style={styles.content_container}>
           <View style={styles.header_container}>
-            <Text style={styles.title_text}>{movie.title}</Text>
+            <Text style={styles.title_text} numberOfLines={2} ellipsizeMode={"head"}>{movie.title}</Text>
             <Text style={styles.vote_text}>{movie.vote_average}</Text>
             {displayFavoriteIcon()}
           </View>
@@ -62,13 +62,14 @@ const styles = StyleSheet.create({
   header_container: {
     flex: 2,
     flexDirection: 'row',
-    alignItems: "center",
+    flexWrap: 'wrap',
+    alignItems: "center"
   },
   title_text: {
     fontWeight: 'bold',
     fontSize: 20,
     flex: 1,
-    flexWrap: 'wrap',
+    height: 50,
     paddingRight: 5
   },
   fav_icon: {
@@ -81,6 +82,7 @@ const styles = StyleSheet.create({
   },
   description_container: {
     flex: 7,
+    marginTop: 20
   },
   description_text: {
     fontStyle: 'italic',

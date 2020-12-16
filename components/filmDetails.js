@@ -9,7 +9,7 @@ import { getFilmsDetailsFromApi, getImageFromApi } from "../API/TMDBApi";
 import { connect } from 'react-redux';
 import { useRoute } from '@react-navigation/native';
 
-// {props, toggleFavorite, favoritesFilm}
+
 function FilmDetails(props) {
     
     //From Search.js Navigation Route to API call
@@ -51,10 +51,11 @@ function FilmDetails(props) {
 
     // Modification état Icone favoris
     var displayFavoriteIcon = () =>{
-
+        var favoritesFilm = props.favoritesFilm;
+        
         var favIcon = <FontAwesome name="heart-o" size={32} color="#0fbcf9"/>;
 
-        if (favoritesFilm.findIndex(item => item.id === state.film.id)!== -1) {
+        if (favoritesFilm.findIndex(item => item.id === dataDetailsFilm.id)!== -1) {
 
             favIcon = <FontAwesome name="heart" size={32} color="#0fbcf9"/>;
         }

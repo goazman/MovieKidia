@@ -3,10 +3,18 @@ import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { getImageFromApi } from "../API/TMDBApi";
 
+
 export default function FilmItem(props) {
   
     const movie = props.filmProp;
     const displayDetailForFilm = props.displayDetailForFilm;
+
+
+    var displayFavoriteIcon = () => {
+      if (props.isThereFavoritesFilm) {
+        return <FontAwesome name="heart" size={21} color="#0fbcf9" style={styles.fav_icon}/>
+      }
+  }
 
     return (
       <TouchableOpacity style={styles.main_container} onPress={() => displayDetailForFilm(movie.id)}>
@@ -18,7 +26,7 @@ export default function FilmItem(props) {
           <View style={styles.header_container}>
             <Text style={styles.title_text}>{movie.title}</Text>
             <Text style={styles.vote_text}>{movie.vote_average}</Text>
-          <FontAwesome name="heart-o" size={21} color="#0fbcf9" style={styles.fav_icon} onPress={() => console.log("click detected FilmItem favIcon ")}/>
+            {displayFavoriteIcon()}
           </View>
           <View style={styles.description_container}>
             <Text style={styles.description_text} numberOfLines={6}>{movie.overview}</Text>

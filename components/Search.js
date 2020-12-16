@@ -3,15 +3,17 @@ import { StyleSheet, View, FlatList,  Button, TextInput, ActivityIndicator } fro
 import FilmItem from "./filmItem";
 import { getFilmsFromApiWithSearchedText } from '../API/TMDBApi';
 
+import { useNavigation } from '@react-navigation/native';
+import { connect } from 'react-redux';
 
-export default function Search({navigation}) {
+
+function Search(props) {
 
     const [searchText, setSearchText] = useState("");
     const [pages, setPages] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
     const [dataApi, setDataApi] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-
     
     var loadFilms = (init) => {
         if (searchText.length > 0) {
@@ -54,9 +56,12 @@ export default function Search({navigation}) {
     }
 
     // NAVIGATION and idFilm (useRoute hook) to filmDetails
+    const navigation = useNavigation();
     var displayDetailForFilm = (idFilm) => {
         navigation.navigate("FilmDetails",{idFilm: idFilm});
     }
+
+   
 
     return(
         <View style={styles.main_container}>
@@ -69,15 +74,19 @@ export default function Search({navigation}) {
                 />
             <Button color="#3c40c6" title="Rechercher" onPress={() => loadFilms(true)}/>
             <FlatList
-            data={dataApi}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={({item}) => <FilmItem filmProp={item} displayDetailForFilm={displayDetailForFilm}/>}
-            onEndReachedThreshold={0.5}
-            onEndReached={() => {
-                if (pages < totalPages) {
-                    loadFilms(false)
-                }
-            }}
+                data={dataApi}
+                extraData={props.favoritesFilm}
+                keyExtractor={(item) => item.id.toString()}
+                renderItem={({item}) => <FilmItem 
+                                            filmProp={item} 
+                                            isThereFavoritesFilm={(props.favoritesFilm.findIndex(film => film.id === item.id) !=-1) ? true : false}
+                                            displayDetailForFilm={displayDetailForFilm}/>}
+                onEndReachedThreshold={0.5}
+                onEndReached={() => {
+                    if (pages < totalPages) {
+                        loadFilms(false)
+                    }
+                }}
             />
             {displayLoading()}
         </View>
@@ -113,3 +122,8 @@ const styles = StyleSheet.create({
     }
 })
 
+function mapStateToProps(state) {
+    return { favoritesFilm: state.favoritesFilm }
+}
+
+export default connect(mapStateToProps)(Search);

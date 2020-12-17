@@ -26,19 +26,19 @@ function HomeStack() {
 }
 
 function NavStack() {
-  return(
-    <Stack.Navigator 
-      headerMode="float" 
-      screenOptions={{
-        headerTintColor: '#3c40c6',
-        headerStyle: { backgroundColor: '#0fbcf9'},
-      }}
-    >
-      <Stack.Screen name="Search" component={Search} options={{title: "Rechercher des films"}}/>
-      <Stack.Screen name="FilmDetails" component={FilmDetails} options={{title: "Détail du film"}}/>
-    </Stack.Navigator>
-  );
-}
+    return(
+      <Stack.Navigator 
+        headerMode="float"
+        screenOptions={{
+          headerTintColor: '#3c40c6',
+          headerStyle: { backgroundColor: '#0fbcf9'},
+        }}
+      >
+        <Stack.Screen name="Search" component={NavBottomTab} options={{title: "Rechercher des films"}}/>
+        <Stack.Screen name="FilmDetails" component={FilmDetails} options={{title: "Détail du film"}}/>
+      </Stack.Navigator>
+    );
+  }
 
 
 const Tab = createBottomTabNavigator();
@@ -57,7 +57,7 @@ const Tab = createBottomTabNavigator();
           labelStyle: { fontSize: 15 }
         }}
       >
-        <Tab.Screen name="Search" component={NavStack} options={{ 
+        <Tab.Screen name="Search" component={Search} options={{ 
           tabBarIcon: ({ color, size }) => (<FontAwesome name="search" color="#3c40c6" size={21}/>),
           }}/>
         <Tab.Screen name="Favoris" component={Favorites} options={{ 

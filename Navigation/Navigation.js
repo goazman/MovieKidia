@@ -13,17 +13,27 @@ import { FontAwesome } from '@expo/vector-icons';
 
 const Stack = createStackNavigator();
 
+function HomeStack() {
+  return(
+    <Stack.Navigator 
+      headerMode="none" 
+      initialRouteName="HomePage"
+    >
+      <Stack.Screen name="HomePage" component={HomePage} options={{title: "Accueil"}}/>
+      <Stack.Screen name="Search" component={NavStack} options={{title: "Rechercher des films"}}/>
+    </Stack.Navigator>
+  );
+}
+
 function NavStack() {
     return(
       <Stack.Navigator 
         headerMode="float"
-        initialRouteName="HomePage"
         screenOptions={{
           headerTintColor: '#3c40c6',
           headerStyle: { backgroundColor: '#0fbcf9'},
         }}
       >
-        <Stack.Screen name="HomePage" component={HomePage} options={{title: "Accueil"}} />
         <Stack.Screen name="Search" component={Search} options={{title: "Rechercher des films"}}/>
         <Stack.Screen name="FilmDetails" component={FilmDetails} options={{title: "Détail du film"}}/>
       </Stack.Navigator>

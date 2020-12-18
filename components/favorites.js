@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
-export default function Favorites () {
+export default function Favorites (props) {
     
     return(
         <View style={styles.Test}>
@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
     Test: {
         flex: 1,
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
+        backgroundColor: "yellow"
     }
 })

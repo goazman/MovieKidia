@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
-import { StyleSheet, View, FlatList,  Button, TextInput, ActivityIndicator } from "react-native";
+import { useNavigation } from '@react-navigation/native';
+import { StyleSheet, View, Button, TextInput, ActivityIndicator } from "react-native";
 import FilmItem from "./filmItem";
+import FilmList from "./filmList";
 import { getFilmsFromApiWithSearchedText } from '../API/TMDBApi';
 
-import { useNavigation } from '@react-navigation/native';
 import { connect } from 'react-redux';
 
 
@@ -73,20 +74,12 @@ function Search(props) {
                 clearButtonMode="always"
                 />
             <Button color="#3c40c6" title="Rechercher" onPress={() => loadFilms(true)}/>
-            <FlatList
-                data={dataApi}
-                extraData={props.favoritesFilm}
-                keyExtractor={(item) => item.id.toString()}
-                renderItem={({item}) => <FilmItem 
-                                            filmProp={item} 
-                                            isThereFavoritesFilm={(props.favoritesFilm.findIndex(film => film.id === item.id) !=-1) ? true : false}
-                                            displayDetailForFilm={displayDetailForFilm}/>}
-                onEndReachedThreshold={0.5}
-                onEndReached={() => {
-                    if (pages < totalPages) {
-                        loadFilms(false)
-                    }
-                }}
+            <FilmList
+                films={dataApi}
+                navigation={props.navigation}
+                loadFilms={loadFilms()}
+                page={pages}
+                totalPages={totalPages}
             />
             {displayLoading()}
         </View>

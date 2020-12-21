@@ -36,6 +36,7 @@ function NavStack() {
       >
         <Stack.Screen name="Search" component={NavBottomTab} options={{title: "Rechercher des films"}}/>
         <Stack.Screen name="FilmDetails" component={FilmDetails} options={{title: "Détail du film"}}/>
+        <Stack.Screen name="Favorites" component={Favorites} options={{title: "Mes favoris"}}/>
       </Stack.Navigator>
     );
   }

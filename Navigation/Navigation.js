@@ -28,7 +28,7 @@ function HomeStack() {
 function NavStack() {
     return(
       <Stack.Navigator 
-        headerMode="float"
+        headerMode="screen"
         screenOptions={{
           headerTintColor: '#3c40c6',
           headerStyle: { backgroundColor: '#0fbcf9'},
@@ -47,7 +47,6 @@ const Tab = createBottomTabNavigator();
  function NavBottomTab() {
    return (
       <Tab.Navigator
-      
         tabBarOptions={{
           activeTintColor: 'white',
           inactiveTintColor: 'black',
@@ -63,7 +62,7 @@ const Tab = createBottomTabNavigator();
           }}/>
         <Tab.Screen name="Favoris" component={Favorites} options={{ 
           tabBarIcon: ({ color, size }) => (<FontAwesome name="heart" color="#3c40c6" size={21}/>),
-          tabBarBadge: 3 
+          tabBarBadge: 3
           }}/>
       </Tab.Navigator>
    );

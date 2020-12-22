@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import { StyleSheet, View, FlatList,  Button, TextInput, ActivityIndicator } from "react-native";
-import FilmItem from "./filmItem";
+import { useNavigation } from '@react-navigation/native';
+import { StyleSheet, View, Button, TextInput, ActivityIndicator } from "react-native";
+import FilmList from "./filmList";
 import { getFilmsFromApiWithSearchedText } from '../API/TMDBApi';
 
-import { useNavigation } from '@react-navigation/native';
 import { connect } from 'react-redux';
 
 
@@ -16,6 +16,7 @@ function Search(props) {
     const [isLoading, setIsLoading] = useState(false);
     
     var loadFilms = (init) => {
+        
         if (searchText.length > 0) {
 
             setIsLoading(true);
@@ -35,14 +36,23 @@ function Search(props) {
                     setDataApi(data.results);
                 }
             setIsLoading(false);
+            // console.log(dataApi); 
             });
-        }     
+        }  
     }
     
 
     var searchTextInput = (text) => {
         setSearchText(text);
     }
+
+    var searchFilms = () => {
+        pages;
+        totalPages;
+        setDataApi([]);
+        loadFilms();
+    }
+
 
     // Icone d'indication de chargement de la liste
     var displayLoading = () => {
@@ -60,33 +70,25 @@ function Search(props) {
     var displayDetailForFilm = (idFilm) => {
         navigation.navigate("FilmDetails",{idFilm: idFilm});
     }
-
-   
-
+    
     return(
         <View style={styles.main_container}>
             <TextInput 
                 style={styles.textinput} 
                 placeholder="Titre du film"
                 onChangeText={(text) => searchTextInput(text)}
-                onSubmitEditing={() => loadFilms(true)} 
+                onSubmitEditing={() => searchFilms()} 
                 clearButtonMode="always"
                 />
-            <Button color="#3c40c6" title="Rechercher" onPress={() => loadFilms(true)}/>
-            <FlatList
-                data={dataApi}
-                extraData={props.favoritesFilm}
-                keyExtractor={(item) => item.id.toString()}
-                renderItem={({item}) => <FilmItem 
-                                            filmProp={item} 
-                                            isThereFavoritesFilm={(props.favoritesFilm.findIndex(film => film.id === item.id) !=-1) ? true : false}
-                                            displayDetailForFilm={displayDetailForFilm}/>}
-                onEndReachedThreshold={0.5}
-                onEndReached={() => {
-                    if (pages < totalPages) {
-                        loadFilms(false)
-                    }
-                }}
+            <Button color="#3c40c6" title="Rechercher" onPress={() => searchFilms()}/>
+            
+            <FilmList
+                filmsFromSearch={dataApi}
+                navigation={props.navigation}
+                loadFilms={loadFilms}
+                pages={pages}
+                totalPages={totalPages}
+                favoritesList={false}
             />
             {displayLoading()}
         </View>

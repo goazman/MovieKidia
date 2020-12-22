@@ -1,13 +1,14 @@
 import React, {useState, useEffect} from 'react';
+import { useRoute } from '@react-navigation/native';
 import { StyleSheet, View, ActivityIndicator, ScrollView, Image, Text, TouchableOpacity } from 'react-native';
 import moment from 'moment';
 import numeral from 'numeral';
+
 import { FontAwesome } from '@expo/vector-icons';
 
 import { getFilmsDetailsFromApi, getImageFromApi } from "../API/TMDBApi";
 
 import { connect } from 'react-redux';
-import { useRoute } from '@react-navigation/native';
 
 
 function FilmDetails(props) {

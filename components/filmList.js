@@ -16,21 +16,23 @@ function FilmList(props) {
         navigation.navigate("FilmDetails",{idFilm: idFilm});
     }
 
+    console.log(props.films);
+
     return(
         <FlatList
             style={styles.list}
-            data={dataApi}
+            data={props.films}
             extraData={props.favoritesFilm}
             keyExtractor={(item) => item.id.toString()}
             renderItem={({item}) => <FilmItem 
                                         filmProp={item} 
                                         isThereFavoritesFilm={(props.favoritesFilm.findIndex(film => film.id === item.id) !=-1) ? true : false}
-                                        displayDetailForFilm={displayDetailForFilm}/>
+                                        displayDetailForFilm={displayDetailForFilm()}/>
                         }
             onEndReachedThreshold={0.5}
             onEndReached={() => {
-                if (pages < totalPages) {
-                    loadFilms(false)
+                if (props.favoriteList && props.pages < props.totalPages) {
+                    props.loadFilms()
                 }
             }}
         />

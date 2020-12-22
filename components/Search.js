@@ -17,6 +17,7 @@ function Search(props) {
     const [isLoading, setIsLoading] = useState(false);
     
     var loadFilms = (init) => {
+        
         if (searchText.length > 0) {
 
             setIsLoading(true);
@@ -36,14 +37,22 @@ function Search(props) {
                     setDataApi(data.results);
                 }
             setIsLoading(false);
+            console.log(dataApi); 
             });
-        }     
+        }  
     }
     
 
     var searchTextInput = (text) => {
         setSearchText(text);
     }
+
+    var searchFilms = () => {
+        pages;
+        totalPages;
+        loadFilms();
+    }
+
 
     // Icone d'indication de chargement de la liste
     var displayLoading = () => {
@@ -62,24 +71,24 @@ function Search(props) {
         navigation.navigate("FilmDetails",{idFilm: idFilm});
     }
 
-   
-
     return(
         <View style={styles.main_container}>
             <TextInput 
                 style={styles.textinput} 
                 placeholder="Titre du film"
                 onChangeText={(text) => searchTextInput(text)}
-                onSubmitEditing={() => loadFilms(true)} 
+                onSubmitEditing={() => searchFilms()} 
                 clearButtonMode="always"
                 />
-            <Button color="#3c40c6" title="Rechercher" onPress={() => loadFilms(true)}/>
+            <Button color="#3c40c6" title="Rechercher" onPress={() => searchFilms()}/>
+            
             <FilmList
                 films={dataApi}
                 navigation={props.navigation}
-                loadFilms={loadFilms()}
-                page={pages}
+                loadFilms={loadFilms}
+                pages={pages}
                 totalPages={totalPages}
+                favoritesList={false}
             />
             {displayLoading()}
         </View>

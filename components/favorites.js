@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text } from 'react-native'
+import { StyleSheet } from 'react-native'
 import FilmList from "./filmList";
 import { connect } from 'react-redux';
 
@@ -7,7 +7,7 @@ function Favorites (props) {
     
     return(
         <FilmList
-            films={props.favoritesFilm}
+            filmsFromSearch={props.favoritesFilm}
             navigation={props.navigation}
             favoriteList={true}
         />

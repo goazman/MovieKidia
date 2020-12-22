@@ -8,6 +8,7 @@ export default function FilmItem(props) {
   
     const movie = props.filmProp;
     const displayDetailForFilm = props.displayDetailForFilm;
+    
 
 
     var displayFavoriteIcon = () => {

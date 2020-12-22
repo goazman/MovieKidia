@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { StyleSheet, View, Button, TextInput, ActivityIndicator } from "react-native";
-import FilmItem from "./filmItem";
 import FilmList from "./filmList";
 import { getFilmsFromApiWithSearchedText } from '../API/TMDBApi';
 
@@ -37,7 +36,7 @@ function Search(props) {
                     setDataApi(data.results);
                 }
             setIsLoading(false);
-            console.log(dataApi); 
+            // console.log(dataApi); 
             });
         }  
     }
@@ -50,6 +49,7 @@ function Search(props) {
     var searchFilms = () => {
         pages;
         totalPages;
+        setDataApi([]);
         loadFilms();
     }
 
@@ -70,7 +70,7 @@ function Search(props) {
     var displayDetailForFilm = (idFilm) => {
         navigation.navigate("FilmDetails",{idFilm: idFilm});
     }
-
+    
     return(
         <View style={styles.main_container}>
             <TextInput 
@@ -83,7 +83,7 @@ function Search(props) {
             <Button color="#3c40c6" title="Rechercher" onPress={() => searchFilms()}/>
             
             <FilmList
-                films={dataApi}
+                filmsFromSearch={dataApi}
                 navigation={props.navigation}
                 loadFilms={loadFilms}
                 pages={pages}

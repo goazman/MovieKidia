@@ -15,7 +15,7 @@ function FilmList(props) {
 
     return(
         <FlatList
-            style={styles.list}
+            style={styles.filmList}
             data={props.filmsFromSearch}
             extraData={props.favoritesFilm}
             keyExtractor={(item) => item.id.toString()}
@@ -34,8 +34,9 @@ function FilmList(props) {
 
 const styles = StyleSheet.create({
 
-    list: {
+    filmList: {
         flex: 1,
+        marginTop: 10
     }
 })
 

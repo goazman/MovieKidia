@@ -12,15 +12,19 @@ import { FontAwesome } from '@expo/vector-icons';
 
 
 const Stack = createStackNavigator();
-
 function HomeStack() {
   return(
     <Stack.Navigator 
-      headerMode="none" 
+      headerMode="screen"
       initialRouteName="HomePage"
+      screenOptions={{
+        headerTintColor: '#3c40c6',
+        headerStyle: { backgroundColor: '#0fbcf9', height:100}
+      }}
     >
-      <Stack.Screen name="HomePage" component={HomePage} options={{title: "Accueil"}}/>
-      <Stack.Screen name="Search" component={NavStack} options={{title: "Rechercher des films"}}/>
+      <Stack.Screen name="HomePage" component={HomePage} options={{title: "Accueil", headerShown: false}}/>
+      <Stack.Screen name="Search" component={Search} options={{title: "Rechercher des films"}}/>
+      <Stack.Screen name="FilmDetails" component={FilmDetails} options={{title: "Détail du film"}}/>
     </Stack.Navigator>
   );
 }
@@ -31,20 +35,19 @@ function NavStack() {
         headerMode="screen"
         screenOptions={{
           headerTintColor: '#3c40c6',
-          headerStyle: { backgroundColor: '#0fbcf9'},
+          headerStyle: { backgroundColor: '#0fbcf9', height:100},
         }}
       >
-        <Stack.Screen name="Search" component={NavBottomTab} options={{title: "Rechercher des films"}}/>
+        <Stack.Screen name="Favoris" component={Favorites} options={{title: "Mes favoris"}}/>
         <Stack.Screen name="FilmDetails" component={FilmDetails} options={{title: "Détail du film"}}/>
-        <Stack.Screen name="Favorites" component={Favorites} options={{title: "Mes favoris"}}/>
       </Stack.Navigator>
     );
   }
 
 
 const Tab = createBottomTabNavigator();
+function NavBottomTab() {
 
- function NavBottomTab() {
    return (
       <Tab.Navigator
         tabBarOptions={{
@@ -57,10 +60,10 @@ const Tab = createBottomTabNavigator();
           labelStyle: { fontSize: 15 }
         }}
       >
-        <Tab.Screen name="Search" component={Search} options={{ 
+        <Tab.Screen name="Search" component={HomeStack} options={{ 
           tabBarIcon: ({ color, size }) => (<FontAwesome name="search" color="#3c40c6" size={21}/>),
           }}/>
-        <Tab.Screen name="Favoris" component={Favorites} options={{ 
+        <Tab.Screen name="Favoris" component={NavStack} options={{ 
           tabBarIcon: ({ color, size }) => (<FontAwesome name="heart" color="#3c40c6" size={21}/>),
           tabBarBadge: 3
           }}/>
@@ -68,4 +71,4 @@ const Tab = createBottomTabNavigator();
    );
  }
 
-export default HomeStack;
+export default NavBottomTab;

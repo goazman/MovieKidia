@@ -10,11 +10,8 @@ import Favorites from "../components/favorites";
 
 import { FontAwesome } from '@expo/vector-icons';
 
-import { connect } from 'react-redux';
-
 
 const Stack = createStackNavigator();
-
 function HomeStack() {
   return(
     <Stack.Navigator 
@@ -49,8 +46,7 @@ function NavStack() {
 
 
 const Tab = createBottomTabNavigator();
-
- function NavBottomTab() {
+function NavBottomTab() {
 
    return (
       <Tab.Navigator
